@@ -6,6 +6,8 @@ import json
 workbook = load_workbook('./document/datos.xlsx')
 worksheet = workbook.active
 
+i = 0
+
 for row in worksheet.values:
 
     # Omito la primera fila que contiene los encabezados en el archivo excel.
@@ -30,4 +32,6 @@ for row in worksheet.values:
         "eps" : row[12],
     }
 
-    print(data)
+    i+= 1
+
+    print(i)
