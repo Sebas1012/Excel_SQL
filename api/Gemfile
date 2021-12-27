@@ -1,0 +1,17 @@
+# frozen_string_literal: true
+
+source "https://rubygems.org"
+
+git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
+
+group :production do
+    gem 'sinatra', '~> 1.4', '>= 1.4.7'
+    gem 'puma', '~> 5.5', '>= 5.5.2'
+    # TODO: Cambiar motor de base de datos por SQLserver
+    # gem 'mysql2', '~> 0.5.3'
+end
+
+group :development do
+    gem 'dotenv', '~> 2.7', '>= 2.7.6'
+    gem 'sinatra-reloader', '~> 1.0'
+end
