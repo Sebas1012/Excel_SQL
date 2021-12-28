@@ -1,4 +1,5 @@
 import json
+import requests
 from openpyxl import load_workbook
 
 # Configuraciones Iniciales de openpyxl
@@ -10,13 +11,17 @@ counter = open('./counter.txt', 'r')
 i = int(counter.read())
 j = 0
 
+headers = {'Content-Type':'application/json'}
+
 for row in sheet.iter_rows(min_row=i, values_only=True):
 
+    fecha_atencion = str(row[2])[:10]
+
     # Dicionario para ordenar los datos obtenidos de la lectura del archivo excel.
-    data = {
+    body = {
             "tipo_doc" : row[0],
             "documento" : row[1],
-            "fecha_atencion" : row[2],
+            "fecha_atencion" : fecha_atencion,
             "tipo_atencion" : row[5],
             "medico" : row[6],
             "dx" : row[7],
@@ -29,9 +34,14 @@ for row in sheet.iter_rows(min_row=i, values_only=True):
             "observaciones" : row[14],
             "eps" : row[15],
         }
+
+    body = json.dumps(body)
+
+    request = requests.post('http://admin:test@127.0.0.1:4567/test', headers=headers, data=body)
+    print(request)
     
     j+=1
-    print(data)
+    print(body)
 
 
 j = j + i
