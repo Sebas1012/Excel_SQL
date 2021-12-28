@@ -12,4 +12,19 @@ end
 
 conn = TinyTds::Client.new(username: ENV['DB_USER'], password: ENV['DB_PASS'], host: ENV['DB_HOST'], port: ENV['DB_PORT'], database: ENV['DB_DB'])
 
-puts conn.active?
+before do
+    content_type :json
+end
+
+get '/hello' do
+    'Hello'
+end
+
+post '/test' do
+    data = JSON.parse request.body.read
+
+    code = conn.execute("INSERT INTO test VALUES 
+                        ('#{data['tipo_doc']}', '#{data['documento']}', '#{data['fecha_atencion']}', '#{data['tipo_atencion']}', '#{data['medico']}', '#{data['dx']}', 
+                        '#{data['descripcion_dx']}', '#{data['lateralidad']}', '#{data['av']}', '#{data['tipo_av']}', '#{data['emc']}', '#{data['av_lb']}', 
+                        '#{data['observaciones']}', '#{data['eps']}')")
+end
