@@ -26,15 +26,19 @@ GEM
     sinatra-reloader (1.0)
       sinatra-contrib
     tilt (2.0.10)
+    tiny_tds (2.1.5)
+    tiny_tds (2.1.5-x64-mingw32)
 
 PLATFORMS
   ruby
+  x64-mingw32
 
 DEPENDENCIES
   dotenv (~> 2.7, >= 2.7.6)
   puma (~> 5.5, >= 5.5.2)
   sinatra (~> 1.4, >= 1.4.7)
   sinatra-reloader (~> 1.0)
+  tiny_tds (~> 2.1, >= 2.1.5)
 
 BUNDLED WITH
    2.1.4
