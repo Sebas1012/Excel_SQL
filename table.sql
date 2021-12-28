@@ -1,5 +1,5 @@
 CREATE TABLE test(
-	id INT NOT NULL AUTO_INCREMENT,
+	id INT NOT NULL IDENTITY(1, 1),
 	tipo_doc VARCHAR(10) NOT NULL,
 	documento VARCHAR(15) NOT NULL,
 	fecha_atencion DATE NOT NULL,
