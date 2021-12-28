@@ -11,37 +11,38 @@ counter = open('./counter.txt', 'r')
 i = int(counter.read())
 j = 0
 
+# Cabecereas para la peticion POST
 headers = {'Content-Type':'application/json'}
 
+
 for row in sheet.iter_rows(min_row=i, values_only=True):
+  fecha_atencion = str(row[2])[:10]
 
-    fecha_atencion = str(row[2])[:10]
-
-    # Dicionario para ordenar los datos obtenidos de la lectura del archivo excel.
-    body = {
-            "tipo_doc" : row[0],
-            "documento" : row[1],
-            "fecha_atencion" : fecha_atencion,
-            "tipo_atencion" : row[5],
-            "medico" : row[6],
-            "dx" : row[7],
-            "descripcion_dx" : row[8],
-            "lateralidad" : row[9],
-            "av" : row[10],
-            "tipo_av" : row[11],
-            "emc" : row[12],
-            "av_lb" : row[13],
-            "observaciones" : row[14],
-            "eps" : row[15],
+  # Dicionario para ordenar los datos obtenidos de la lectura del archivo excel.
+  body = {
+          "tipo_doc" : row[0],
+          "documento" : row[1],
+          "fecha_atencion" : fecha_atencion,
+          "tipo_atencion" : row[5],
+          "medico" : row[6],
+          "dx" : row[7],
+          "descripcion_dx" : row[8],
+          "lateralidad" : row[9],
+          "av" : row[10],
+          "tipo_av" : row[11],
+          "emc" : row[12],
+          "av_lb" : row[13],
+          "observaciones" : row[14],
+          "eps" : row[15],
         }
 
-    body = json.dumps(body)
+  body = json.dumps(body)
 
-    request = requests.post('http://admin:test@127.0.0.1:4567/test', headers=headers, data=body)
-    print(request)
+  request = requests.post('http://admin:test@127.0.0.1:4567/test', headers=headers, data=body)
+  print(request)
     
-    j+=1
-    print(body)
+  j+=1
+  print(body)
 
 
 j = j + i
