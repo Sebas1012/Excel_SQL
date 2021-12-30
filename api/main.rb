@@ -16,15 +16,18 @@ before do
   content_type :json
 end
 
-get '/hello' do
-  'Hello'
+get '/lewis' do
+  conn.execute("SELECT * FROM test").each.to_json
 end
 
 post '/test' do
   data = JSON.parse request.body.read
 
-  code = conn.execute("INSERT INTO test VALUES 
-                      ('#{data['tipo_doc']}', '#{data['documento']}', '#{data['fecha_atencion']}', '#{data['tipo_atencion']}', '#{data['medico']}', '#{data['dx']}', 
-                      '#{data['descripcion_dx']}', '#{data['lateralidad']}', '#{data['av']}', '#{data['tipo_av']}', '#{data['emc']}', '#{data['av_lb']}', 
-                      '#{data['observaciones']}', '#{data['eps']}')")
+  # code = conn.execute("INSERT INTO test VALUES 
+  #                     ('#{data['tipo_doc'].to_s}', '#{data['documento'].to_s}', '#{data['tipo_atencion'].to_s}', '#{data['medico'].to_s}', '#{data['dx'].to_s}', 
+  #                     '#{data['descripcion_dx'].to_s}', '#{data['lateralidad'].to_s}', '#{data['av'].to_s}', '#{data['tipo_av'].to_s}', '#{data['emc'].to_s}', 
+  #                     '#{data['av_lb']}', '#{data['observaciones'].to_s}', '#{data['eps'].to_s}'), '#{data['anio'].to_s}', '#{data['mes'].to_s}'")
+
+  data
+  # conn.close
 end

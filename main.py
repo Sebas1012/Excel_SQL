@@ -3,8 +3,8 @@ import requests
 from openpyxl import load_workbook
 
 # Configuraciones Iniciales de openpyxl
-workbook = load_workbook('./document/datos.xlsx')
-sheet = workbook.active
+book = load_workbook('./document/datos.xlsx')
+sheet = book.active
 
 # Lectura del archivo counter, el cual almacena la ultima fila que se itero para poder continuar desde la misma.
 counter = open('./counter.txt', 'r')
