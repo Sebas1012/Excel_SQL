@@ -1,4 +1,4 @@
-# Excel a SQL
+# Excel a SQLserver
 
 Estos scripts permiten enviar los datos de una tabla en Excel a una tabla en SQLserver.
 
@@ -21,3 +21,22 @@ Este programa se divide en dos partes, la primera que se encarga de leer los dat
 | [Sinatra](http://sinatrarb.com/) | 2.1.0 |
 | [Puma](https://puma.io/) | 5.5.2 |
 | [Tiny_tds](https://github.com/rails-sqlserver/tiny_tds) | 2.1.5 |
+
+## Instalación de dependencias:
+
+Todas las dependencias que usa este proyecto se encuentran manejadas por los correspondientes manejadores de paquetes de cada lenguaje, pip para python y bundler para ruby, las dependencias de python se encuentran en el archivo [requirements.txt](/requirements.txt), mientras que las de ruby se encuentran en el archivo [Gemfile](/api/Gemfile), para instalar las dependencias utilice los siguientes comandos:
+
+- Dependencias Python:
+```
+pip install -r requirements.txt
+```
+- Dependencias Ruby:
+```
+bundle
+```
+
+*Nota: Recuerde setar situado en la ruta correcta para poder ejecutar los comandos.*
+
+<p align="center">
+  <b>Hecho con ❤️ por: Sebastián. </b>
+</p>
