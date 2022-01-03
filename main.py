@@ -2,56 +2,48 @@ import json
 import requests
 from openpyxl import load_workbook
 
-# Configuraciones Iniciales de openpyxl
-book = load_workbook('./document/datos.xlsx')
-sheet = book.active
+def read_xl(book, counter_file, sheet_name):
+  book = load_workbook(str(book))
+  
+  if sheet_name == 'None':
+    sheet = book.active
+  else:
+    sheet = book[str(sheet_name)]
 
-# Lectura del archivo counter, el cual almacena la ultima fila que se itero para poder continuar desde la misma.
-counter = open('./counter.txt', 'r')
-i = int(counter.read())
-j = 0
+  file = str(counter_file)
 
-# Cabecereas para la peticion POST
-headers = {'Content-Type':'application/json'}
+  file_path = open(file, 'r')
+  i = int(file_path.read())
+  j = 0
 
+  for row in sheet.iter_rows(min_row=1, max_row=1, values_only=True):
+    columns = row
 
-for row in sheet.iter_rows(min_row=i, values_only=True):
-  fecha_atencion = str(row[2])[:10]
+  headers = {'Content-Type':'application/json'}
 
-  # Dicionario para ordenar los datos obtenidos de la lectura del archivo excel.
-  body = {
-          "tipo_doc" : row[0],
-          "documento" : row[1],
-          "fecha_atencion" : fecha_atencion,
-          "tipo_atencion" : row[5],
-          "medico" : row[6],
-          "dx" : row[7],
-          "descripcion_dx" : row[8],
-          "lateralidad" : row[9],
-          "av" : row[10],
-          "tipo_av" : row[11],
-          "emc" : row[12],
-          "av_lb" : row[13],
-          "observaciones" : row[14],
-          "eps" : row[15],
-        }
+  for row in sheet.iter_rows(min_row=i, values_only=True):
+    body = dict(zip(columns, row))
 
-  body = json.dumps(body)
+    body = json.dumps(body)
 
-  request = requests.post('http://admin:test@127.0.0.1:4567/test', headers=headers, data=body)
-  print(request)
+    request = requests.post('http://admin:test@127.0.0.1:4567/test', headers=headers, data=body)
     
-  j+=1
-  print(body)
+    if request.status_code >= 200 and request.status_code < 300:
+      print('Datos enviados con exito. Codigo: ' + str(request.status_code))
+    else:
+      print('Ocurrio un error. Codigo: ' + str(request.status_code))
+
+    j+=1
+
+  j = j + i
+  j = str(j)
+
+  file_path = open(file,'w')
+  file_path.write(j)
+  file_path.close
 
 
-j = j + i
-j = str(j)
+print(read_xl('./document/datos.xlsx', './counters/counter_hoja1.txt', 'Hoja1'))
 
-# Escritura en el archivo counter de la ultima fila iterada para poder contunuar desde la misma si hay actualizaciones en el archivo.
-counter = open('./counter.txt', 'w')
-counter.write(j)
-counter.close()
 
-    
-    
+
