@@ -2,9 +2,13 @@ import json
 import requests
 from openpyxl import load_workbook
 
-def read_xl(book, counter_file):
+def read_xl(book, counter_file, sheet_name):
   book = load_workbook(str(book))
-  sheet = book.active
+  
+  if sheet_name == 'None':
+    sheet = book.active
+  else:
+    sheet = book[str(sheet_name)]
 
   file = str(counter_file)
 
@@ -39,7 +43,7 @@ def read_xl(book, counter_file):
   file_path.close
 
 
-print(read_xl('./document/datos.xlsx', './counter.txt'))
+print(read_xl('./document/datos.xlsx', './counter.txt', 'Hoja1'))
 
 
 
