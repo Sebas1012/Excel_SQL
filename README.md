@@ -10,6 +10,17 @@ Este programa se divide en dos partes, la primera que se encarga de leer los dat
   <img src='https://user-images.githubusercontent.com/50553819/147832572-ead765c4-b7db-494f-9817-1540aece901f.png' width='400px' height='210px'/>
 </p>
 
+El archivo [main.py](main.py) consta de una funcion que se encarga de recibir los diferentes parametros necesarios para trabajar con el excel.
+```Python
+def read_xl(book, counter_file, sheet_name):
+  ...
+```
+
+Esta funcion solo recibe 3 parametros en forma de string donde:
+- **book**: Es la ruta del archivo excel, para mantener un orden sugiero usar la carpeta [document](document) y ahi depositar los archivos a usar.
+- **counter_file**: En este parametro se debe pasar la ruta de un archivo de texto plano con el numero de la fila desde donde se desea comenzar a enviar los registros a la base de datos. Recomiendo usar la carpeta counters y ahi crear todos los .txt necesarios. *Sugiero que el nombre del archivo sea tal que: counter_nombredelahoja.txt*
+- **sheet_name**: Este parametro recibe el nombre de la hoja en la que se encuentra la tabla a usar. Si desea usar la hoja activa solo pase como parametro *'None'*
+
 ## Software Usado:
 
 | Lenguaje/Libreria | Version |
@@ -35,7 +46,7 @@ pip install -r requirements.txt
 bundle
 ```
 
-*Nota: Recuerde setar situado en la ruta correcta para poder ejecutar los comandos.*
+*Nota: Recuerde estar situado en la ruta correcta para poder ejecutar los comandos.*
 
 <p align="center">
   <b>Hecho con ❤️ por: Sebastián. </b>
